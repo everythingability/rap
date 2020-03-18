@@ -1,0 +1,43 @@
+{% extends "_base.html" %}
+{% block content %}
+
+<div>
+  <h2>Rap Dashboard<h2>
+
+
+  {% for hecategory in hecategories %}
+  <h3>{{hecategory.name}}</h3>
+
+   {%for herearcharea in herearchareas%}
+   {%if herearcharea.hecategory.id == hecategory.id  %}
+    <h4>{{herearcharea.name}}</h4>
+
+      {%for gtrcat in herearcharea.gtrs.all%}
+          {{gtrcat.name}} <br>
+
+          {%for project in projects%}
+              {%for thisgtr in project.gtrs.all %}
+                {%if thisgtr == gtrcat%}
+                <a href="{{project.GTRProjectUrl}}" target="_blank">
+                    {{project.title}}
+                    </a>
+                    <br>
+                {%endif%}
+              {%endfor%}
+
+          {%endfor%}
+
+      {%endfor%}
+
+
+
+   {%endif%}
+ 
+   {%endfor%}
+
+  <hr>
+
+  {%endfor%}
+</div>
+
+{% endblock %}

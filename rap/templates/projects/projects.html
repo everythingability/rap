@@ -1,0 +1,37 @@
+{% extends "_base.html" %}
+{% block content %}
+
+<div>
+  
+  <p>
+  <div class="card flex-row flex-wrap">
+
+  {% for project in projects %}
+   <div class="card" style="width: 13rem;">
+   <a href="{{project.url}}" target="_blank">
+      <img class="card-img-top" 
+      src="{%if tool.image_url%}{{tool.image_url}}{%endif%}" 
+      alt="Card image cap" height="100"
+      target="_blank">
+      </a>
+  <div class="card-body">
+          <p class="card-text">
+  <h3><a href="/rap/project/{{project.id}}">{{project.title}}</a></h3>
+
+  {{tool.text}}
+
+  <br>
+  {% if request.user.is_authenticated and request.user.id == 1 %}
+   <a href="/tools/edit/{{tool.id}}" class="btn btn-primary">Edit</a>
+   <br>
+  {%endif%}
+ 
+  </p>
+       </div>
+    </div>
+  {%endfor%}
+ </div>
+  </p>
+</div>
+
+{% endblock %}
